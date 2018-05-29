@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-05-29 19:08:11">
+<Project name="Kino" LastModified="2018-05-20 13:43:49.226027">
+  <Items>
+    <ProjectItem name="User.Bilet" type="CLS"></ProjectItem>
+    <ProjectItem name="User.BiletNormalny" type="CLS"></ProjectItem>
+    <ProjectItem name="User.BiletUlgowy" type="CLS"></ProjectItem>
+    <ProjectItem name="User.Film" type="CLS"></ProjectItem>
+    <ProjectItem name="User.Klient" type="CLS"></ProjectItem>
+    <ProjectItem name="User.Sprzedawca" type="CLS"></ProjectItem>
+  </Items>
+</Project>
+
+
+<Class name="User.Bilet">
+<Abstract>1</Abstract>
+<TimeChanged>64789,13116.867627</TimeChanged>
+<TimeCreated>64788,46933.671963</TimeCreated>
+
+<Property name="film">
+<Type>Film</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="klient">
+<Type>Klient</Type>
+</Property>
+
+<Property name="sprzedawca">
+<Type>Sprzedawca</Type>
+</Property>
+
+<Property name="rzad">
+<Type>%Integer</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="miejsce">
+<Type>%Integer</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="cena">
+<Type>%Double</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="kupiony">
+<Type>%Boolean</Type>
+<Required>1</Required>
+</Property>
+
+<Method name="obliczCene">
+<ReturnType>%Double</ReturnType>
+</Method>
+
+<Method name="init">
+<FormalSpec>film:Film,sprzedawca:Sprzedawca,klient:Klient,rzad:%Integer,miejsce:%Integer,cena:%Double</FormalSpec>
+<Implementation><![CDATA[
+	Set ..film = film
+	Set ..sprzedawca = sprzedawca
+	Set ..klient = klient
+	Set ..rzad = rzad
+	Set ..miejsce = miejsce
+	Set ..cena = cena
+	Set ..kupiony = false
+]]></Implementation>
+</Method>
+
+<Method name="transakcja">
+<Implementation><![CDATA[
+	Set cena = ..obliczCene()
+	Set ..klient.liczbaBiletowKupionych = ..klient.liczbaBiletowKupionych + 1
+	Set ..klient.sumaWydanychPieniedzy = ..klient.sumaWydanychPieniedzy + cena
+	Set ..kupiony = true
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="User.BiletNormalny">
+<Super>User.Bilet</Super>
+<TimeChanged>64789,12699.05561</TimeChanged>
+<TimeCreated>64788,47035.839396</TimeCreated>
+
+<Method name="obliczCene">
+<ReturnType>%Double</ReturnType>
+<Implementation><![CDATA[	Return ..cena
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="User.BiletUlgowy">
+<Super>User.Bilet</Super>
+<TimeChanged>64789,12638.944364</TimeChanged>
+<TimeCreated>64788,47073.848056</TimeCreated>
+
+<Method name="obliczCene">
+<ReturnType>%Double</ReturnType>
+<Implementation><![CDATA[	Return ..cena/2
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="User.Film">
+<ClassType>datatype</ClassType>
+<TimeChanged>64788,49067.386458</TimeChanged>
+<TimeCreated>64788,49067.386458</TimeCreated>
+
+<Property name="rezyser">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="tytul">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+</Class>
+
+
+<Class name="User.Klient">
+<Super>%Persistent,%Populate,%XML.Adaptor,%ZEN.DataModel.Adaptor</Super>
+<TimeChanged>64789,13120.221369</TimeChanged>
+<TimeCreated>64788,46592.807003</TimeCreated>
+
+<Property name="imie">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="nazwisko">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="liczbaBiletowKupionych">
+<Type>%Integer</Type>
+</Property>
+
+<Property name="sumaWydanychPieniedzy">
+<Type>%Double</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^User.KlientD</DataLocation>
+<DefaultData>KlientDefaultData</DefaultData>
+<IdLocation>^User.KlientD</IdLocation>
+<IndexLocation>^User.KlientI</IndexLocation>
+<StreamLocation>^User.KlientS</StreamLocation>
+<Data name="KlientDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>imie</Value>
+</Value>
+<Value name="3">
+<Value>nazwisko</Value>
+</Value>
+<Value name="4">
+<Value>liczbaBiletowKupionych</Value>
+</Value>
+<Value name="5">
+<Value>sumaWydanychPieniedzy</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="User.Sprzedawca">
+<Super>%Persistent,%Populate,%XML.Adaptor,%ZEN.DataModel.Adaptor</Super>
+<TimeChanged>64789,13120.2986</TimeChanged>
+<TimeCreated>64788,46652.581955</TimeCreated>
+
+<Property name="imie">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="nazwisko">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="liczbaBiletowSprzedanych">
+<Type>%Integer</Type>
+</Property>
+
+<Property name="sumaPieniedzyZBiletow">
+<Type>%Double</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^User.SprzedawcaD</DataLocation>
+<DefaultData>SprzedawcaDefaultData</DefaultData>
+<IdLocation>^User.SprzedawcaD</IdLocation>
+<IndexLocation>^User.SprzedawcaI</IndexLocation>
+<StreamLocation>^User.SprzedawcaS</StreamLocation>
+<Data name="SprzedawcaDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>imie</Value>
+</Value>
+<Value name="3">
+<Value>nazwisko</Value>
+</Value>
+<Value name="4">
+<Value>liczbaBiletowSprzedanych</Value>
+</Value>
+<Value name="5">
+<Value>sumaPieniedzyZBiletow</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>
