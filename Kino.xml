@@ -1,34 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-05-29 19:08:11">
-<Project name="Kino" LastModified="2018-05-20 13:43:49.226027">
-  <Items>
-    <ProjectItem name="User.Bilet" type="CLS"></ProjectItem>
-    <ProjectItem name="User.BiletNormalny" type="CLS"></ProjectItem>
-    <ProjectItem name="User.BiletUlgowy" type="CLS"></ProjectItem>
-    <ProjectItem name="User.Film" type="CLS"></ProjectItem>
-    <ProjectItem name="User.Klient" type="CLS"></ProjectItem>
-    <ProjectItem name="User.Sprzedawca" type="CLS"></ProjectItem>
-  </Items>
-</Project>
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-02 09:44:43">
+<Class name="Kino.Adres">
+<Super>%Persistent,%XML.Adaptor</Super>
+<TimeChanged>64801,34993.240265</TimeChanged>
+<TimeCreated>64801,32381.325689</TimeCreated>
+
+<Property name="ulica">
+<Type>%String</Type>
+</Property>
+
+<Property name="NrUlicy">
+<Type>%Integer</Type>
+</Property>
+
+<Property name="NrDomu">
+<Type>%Integer</Type>
+</Property>
+
+<Property name="miasto">
+<Type>%String</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Kino.AdresD</DataLocation>
+<DefaultData>AdresDefaultData</DefaultData>
+<IdLocation>^Kino.AdresD</IdLocation>
+<IndexLocation>^Kino.AdresI</IndexLocation>
+<StreamLocation>^Kino.AdresS</StreamLocation>
+<Data name="AdresDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ulica</Value>
+</Value>
+<Value name="3">
+<Value>NrUlicy</Value>
+</Value>
+<Value name="4">
+<Value>NrDomu</Value>
+</Value>
+<Value name="5">
+<Value>miasto</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
 
 
-<Class name="User.Bilet">
+<Class name="Kino.Bilet">
 <Abstract>1</Abstract>
-<TimeChanged>64789,13116.867627</TimeChanged>
-<TimeCreated>64788,46933.671963</TimeCreated>
-
-<Property name="film">
-<Type>Film</Type>
-<Required>1</Required>
-</Property>
-
-<Property name="klient">
-<Type>Klient</Type>
-</Property>
-
-<Property name="sprzedawca">
-<Type>Sprzedawca</Type>
-</Property>
+<TimeChanged>64801,34635.893684</TimeChanged>
+<TimeCreated>64801,33662.769713</TimeCreated>
 
 <Property name="rzad">
 <Type>%Integer</Type>
@@ -54,34 +80,63 @@
 <ReturnType>%Double</ReturnType>
 </Method>
 
-<Method name="init">
-<FormalSpec>film:Film,sprzedawca:Sprzedawca,klient:Klient,rzad:%Integer,miejsce:%Integer,cena:%Double</FormalSpec>
+<Property name="kupionyPrzez">
+<Type>Kino.Klient</Type>
+<Cardinality>one</Cardinality>
+<Inverse>kupilBilet</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Index name="kupionyPrzezIndex">
+<Properties>kupionyPrzez</Properties>
+</Index>
+
+<Property name="sprzedanyPrzez">
+<Type>Kino.Sprzedawca</Type>
+<Cardinality>one</Cardinality>
+<Inverse>sprzedalBilet</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Index name="sprzedanyPrzezIndex">
+<Properties>sprzedanyPrzez</Properties>
+</Index>
+
+<Property name="naFilm">
+<Type>Kino.Film</Type>
+<Cardinality>one</Cardinality>
+<Inverse>biletyNaTenFilm</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Index name="naFilmIndex">
+<Properties>naFilm</Properties>
+</Index>
+
+<Method name="transakcja">
+<FormalSpec><![CDATA[&film:Kino.Film,rzad:%Integer,miejsce:%Integer,cena:%Double,kupiony:%Boolean,&klient:Kino.Klient,&sprzedawca:Kino.Sprzedawca]]></FormalSpec>
 <Implementation><![CDATA[
-	Set ..film = film
-	Set ..sprzedawca = sprzedawca
-	Set ..klient = klient
+	Set ..naFilm = film
+	Set ..sprzedanyPrzez = sprzedawca
+	Set ..kupionyPrzez = klient
 	Set ..rzad = rzad
 	Set ..miejsce = miejsce
 	Set ..cena = cena
-	Set ..kupiony = false
-]]></Implementation>
-</Method>
-
-<Method name="transakcja">
-<Implementation><![CDATA[
-	Set cena = ..obliczCene()
-	Set ..klient.liczbaBiletowKupionych = ..klient.liczbaBiletowKupionych + 1
-	Set ..klient.sumaWydanychPieniedzy = ..klient.sumaWydanychPieniedzy + cena
+	Set ..cena = ..obliczCene()
+	Set ..kupionyPrzez.liczbaBiletowKupionych = ..kupionyPrzez.liczbaBiletowKupionych + 1
+	Set ..kupionyPrzez.sumaWydanychPieniedzy = ..kupionyPrzez.sumaWydanychPieniedzy + ..cena
+	Set ..sprzedanyPrzez.liczbaBiletowSprzedanych = ..sprzedanyPrzez.liczbaBiletowSprzedanych + 1
+	Set ..sprzedanyPrzez.sumaPieniedzyZBiletow = ..sprzedanyPrzez.sumaPieniedzyZBiletow + ..cena
 	Set ..kupiony = true
 ]]></Implementation>
 </Method>
 </Class>
 
 
-<Class name="User.BiletNormalny">
-<Super>User.Bilet</Super>
-<TimeChanged>64789,12699.05561</TimeChanged>
-<TimeCreated>64788,47035.839396</TimeCreated>
+<Class name="Kino.BiletNormalny">
+<Super>Kino.Bilet</Super>
+<TimeChanged>64801,34847.444641</TimeChanged>
+<TimeCreated>64801,34847.444641</TimeCreated>
 
 <Method name="obliczCene">
 <ReturnType>%Double</ReturnType>
@@ -91,10 +146,10 @@
 </Class>
 
 
-<Class name="User.BiletUlgowy">
-<Super>User.Bilet</Super>
-<TimeChanged>64789,12638.944364</TimeChanged>
-<TimeCreated>64788,47073.848056</TimeCreated>
+<Class name="Kino.BiletUlgowy">
+<Super>Kino.Bilet</Super>
+<TimeChanged>64801,34942.764338</TimeChanged>
+<TimeCreated>64801,34942.764338</TimeCreated>
 
 <Method name="obliczCene">
 <ReturnType>%Double</ReturnType>
@@ -104,27 +159,56 @@
 </Class>
 
 
-<Class name="User.Film">
-<ClassType>datatype</ClassType>
-<TimeChanged>64788,49067.386458</TimeChanged>
-<TimeCreated>64788,49067.386458</TimeCreated>
+<Class name="Kino.Film">
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64801,34993.341143</TimeChanged>
+<TimeCreated>64800,86033.900855</TimeCreated>
 
-<Property name="rezyser">
+<Property name="Title">
 <Type>%String</Type>
 <Required>1</Required>
 </Property>
 
-<Property name="tytul">
+<Property name="Director">
 <Type>%String</Type>
 <Required>1</Required>
 </Property>
+
+<Property name="biletyNaTenFilm">
+<Type>Kino.Bilet</Type>
+<Cardinality>many</Cardinality>
+<Inverse>naFilm</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Kino.FilmD</DataLocation>
+<DefaultData>FilmDefaultData</DefaultData>
+<IdLocation>^Kino.FilmD</IdLocation>
+<IndexLocation>^Kino.FilmI</IndexLocation>
+<StreamLocation>^Kino.FilmS</StreamLocation>
+<Data name="FilmDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Title</Value>
+</Value>
+<Value name="3">
+<Value>Director</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
-<Class name="User.Klient">
-<Super>%Persistent,%Populate,%XML.Adaptor,%ZEN.DataModel.Adaptor</Super>
-<TimeChanged>64789,13120.221369</TimeChanged>
-<TimeCreated>64788,46592.807003</TimeCreated>
+<Class name="Kino.Klient">
+<Super>%Persistent,%XML.Adaptor</Super>
+<TimeChanged>64801,34993.343187</TimeChanged>
+<TimeCreated>64801,31361.398087</TimeCreated>
 
 <Property name="imie">
 <Type>%String</Type>
@@ -138,19 +222,32 @@
 
 <Property name="liczbaBiletowKupionych">
 <Type>%Integer</Type>
+<Parameter name="MINVAL" value="0"/>
 </Property>
 
 <Property name="sumaWydanychPieniedzy">
 <Type>%Double</Type>
+<Parameter name="MINVAL" value="0"/>
+</Property>
+
+<Property name="adres">
+<Type>Adres</Type>
+</Property>
+
+<Property name="kupilBilet">
+<Type>Kino.Bilet</Type>
+<Cardinality>many</Cardinality>
+<Inverse>kupionyPrzez</Inverse>
+<Relationship>1</Relationship>
 </Property>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
-<DataLocation>^User.KlientD</DataLocation>
+<DataLocation>^Kino.KlientD</DataLocation>
 <DefaultData>KlientDefaultData</DefaultData>
-<IdLocation>^User.KlientD</IdLocation>
-<IndexLocation>^User.KlientI</IndexLocation>
-<StreamLocation>^User.KlientS</StreamLocation>
+<IdLocation>^Kino.KlientD</IdLocation>
+<IndexLocation>^Kino.KlientI</IndexLocation>
+<StreamLocation>^Kino.KlientS</StreamLocation>
 <Data name="KlientDefaultData">
 <Structure>listnode</Structure>
 <Subscript/>
@@ -169,15 +266,18 @@
 <Value name="5">
 <Value>sumaWydanychPieniedzy</Value>
 </Value>
+<Value name="6">
+<Value>adres</Value>
+</Value>
 </Data>
 </Storage>
 </Class>
 
 
-<Class name="User.Sprzedawca">
-<Super>%Persistent,%Populate,%XML.Adaptor,%ZEN.DataModel.Adaptor</Super>
-<TimeChanged>64789,13120.2986</TimeChanged>
-<TimeCreated>64788,46652.581955</TimeCreated>
+<Class name="Kino.Sprzedawca">
+<Super>%Persistent,%XML.Adaptor</Super>
+<TimeChanged>64801,34993.301254</TimeChanged>
+<TimeCreated>64801,32011.248002</TimeCreated>
 
 <Property name="imie">
 <Type>%String</Type>
@@ -191,19 +291,28 @@
 
 <Property name="liczbaBiletowSprzedanych">
 <Type>%Integer</Type>
+<Parameter name="MINVAL" value="0"/>
 </Property>
 
 <Property name="sumaPieniedzyZBiletow">
 <Type>%Double</Type>
+<Parameter name="MINVAL" value="0"/>
+</Property>
+
+<Property name="sprzedalBilet">
+<Type>Kino.Bilet</Type>
+<Cardinality>many</Cardinality>
+<Inverse>sprzedanyPrzez</Inverse>
+<Relationship>1</Relationship>
 </Property>
 
 <Storage name="Default">
 <Type>%Library.CacheStorage</Type>
-<DataLocation>^User.SprzedawcaD</DataLocation>
+<DataLocation>^Kino.SprzedawcaD</DataLocation>
 <DefaultData>SprzedawcaDefaultData</DefaultData>
-<IdLocation>^User.SprzedawcaD</IdLocation>
-<IndexLocation>^User.SprzedawcaI</IndexLocation>
-<StreamLocation>^User.SprzedawcaS</StreamLocation>
+<IdLocation>^Kino.SprzedawcaD</IdLocation>
+<IndexLocation>^Kino.SprzedawcaI</IndexLocation>
+<StreamLocation>^Kino.SprzedawcaS</StreamLocation>
 <Data name="SprzedawcaDefaultData">
 <Structure>listnode</Structure>
 <Subscript/>
@@ -225,4 +334,17 @@
 </Data>
 </Storage>
 </Class>
+
+
+<Project name="Kino" LastModified="2018-06-02 09:43:05.56201">
+  <Items>
+    <ProjectItem name="Kino.Film" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Klient" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Sprzedawca" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Adres" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Bilet" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.BiletNormalny" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.BiletUlgowy" type="CLS"></ProjectItem>
+  </Items>
+</Project>
 </Export>
