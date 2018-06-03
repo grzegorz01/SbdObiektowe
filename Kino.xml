@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-03 06:18:22">
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-03 15:09:08">
 <Class name="Kino.Adres">
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
 <TimeChanged>64802,22399.264202</TimeChanged>
@@ -46,7 +46,8 @@
 
 <Class name="Kino.Bilet">
 <Abstract>1</Abstract>
-<TimeChanged>64802,17825.881257</TimeChanged>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64802,53897.758702</TimeChanged>
 <TimeCreated>64801,33662.769713</TimeCreated>
 
 <Property name="rzad">
@@ -123,12 +124,49 @@
 	Set ..kupiony = true
 ]]></Implementation>
 </Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Kino.BiletD</DataLocation>
+<DefaultData>BiletDefaultData</DefaultData>
+<IdLocation>^Kino.BiletD</IdLocation>
+<IndexLocation>^Kino.BiletI</IndexLocation>
+<StreamLocation>^Kino.BiletS</StreamLocation>
+<Data name="BiletDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>rzad</Value>
+</Value>
+<Value name="3">
+<Value>miejsce</Value>
+</Value>
+<Value name="4">
+<Value>cena</Value>
+</Value>
+<Value name="5">
+<Value>kupiony</Value>
+</Value>
+<Value name="6">
+<Value>kupionyPrzez</Value>
+</Value>
+<Value name="7">
+<Value>sprzedanyPrzez</Value>
+</Value>
+<Value name="8">
+<Value>naFilm</Value>
+</Value>
+</Data>
+</Storage>
 </Class>
 
 
 <Class name="Kino.BiletNormalny">
-<Super>Kino.Bilet</Super>
-<TimeChanged>64802,18394.595979</TimeChanged>
+<Super>Kino.Bilet,%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64802,54379.04763</TimeChanged>
 <TimeCreated>64801,34847.444641</TimeCreated>
 
 <Method name="obliczCene">
@@ -136,12 +174,16 @@
 <Implementation><![CDATA[	Return ..cena
 ]]></Implementation>
 </Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+</Storage>
 </Class>
 
 
 <Class name="Kino.BiletUlgowy">
-<Super>Kino.Bilet</Super>
-<TimeChanged>64802,18394.783057</TimeChanged>
+<Super>Bilet,%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64802,54392.346965</TimeChanged>
 <TimeCreated>64801,34942.764338</TimeCreated>
 
 <Method name="obliczCene">
@@ -149,6 +191,10 @@
 <Implementation><![CDATA[	Return ..cena/2
 ]]></Implementation>
 </Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+</Storage>
 </Class>
 
 
@@ -297,7 +343,7 @@
 </Class>
 
 
-<Project name="Kino" LastModified="2018-06-03 02:48:17.257026">
+<Project name="Kino" LastModified="2018-06-03 15:08:57.422288">
   <Items>
     <ProjectItem name="Kino.Adres" type="CLS"></ProjectItem>
     <ProjectItem name="Kino.Bilet" type="CLS"></ProjectItem>
