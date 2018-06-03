@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-02 09:44:43">
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-03 06:07:50">
 <Class name="Kino.Adres">
-<Super>%Persistent,%XML.Adaptor</Super>
-<TimeChanged>64801,34993.240265</TimeChanged>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64802,20335.434124</TimeChanged>
 <TimeCreated>64801,32381.325689</TimeCreated>
 
 <Property name="ulica">
 <Type>%String</Type>
-</Property>
-
-<Property name="NrUlicy">
-<Type>%Integer</Type>
 </Property>
 
 <Property name="NrDomu">
@@ -28,9 +24,8 @@
 <IdLocation>^Kino.AdresD</IdLocation>
 <IndexLocation>^Kino.AdresI</IndexLocation>
 <StreamLocation>^Kino.AdresS</StreamLocation>
+<ExtentSize>10</ExtentSize>
 <Data name="AdresDefaultData">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -47,13 +42,36 @@
 <Value>miasto</Value>
 </Value>
 </Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>1.1</AverageFieldSize>
+</Property>
+<Property name="NrDomu">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>8.8</AverageFieldSize>
+</Property>
+<Property name="miasto">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>5</AverageFieldSize>
+</Property>
+<Property name="ulica">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>4.9</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
 
 
 <Class name="Kino.Bilet">
 <Abstract>1</Abstract>
-<TimeChanged>64801,34635.893684</TimeChanged>
+<TimeChanged>64802,17825.881257</TimeChanged>
 <TimeCreated>64801,33662.769713</TimeCreated>
 
 <Property name="rzad">
@@ -135,7 +153,7 @@
 
 <Class name="Kino.BiletNormalny">
 <Super>Kino.Bilet</Super>
-<TimeChanged>64801,34847.444641</TimeChanged>
+<TimeChanged>64802,18394.595979</TimeChanged>
 <TimeCreated>64801,34847.444641</TimeCreated>
 
 <Method name="obliczCene">
@@ -148,7 +166,7 @@
 
 <Class name="Kino.BiletUlgowy">
 <Super>Kino.Bilet</Super>
-<TimeChanged>64801,34942.764338</TimeChanged>
+<TimeChanged>64802,18394.783057</TimeChanged>
 <TimeCreated>64801,34942.764338</TimeCreated>
 
 <Method name="obliczCene">
@@ -161,15 +179,15 @@
 
 <Class name="Kino.Film">
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
-<TimeChanged>64801,34993.341143</TimeChanged>
+<TimeChanged>64802,20336.92965</TimeChanged>
 <TimeCreated>64800,86033.900855</TimeCreated>
 
-<Property name="Title">
+<Property name="tytul">
 <Type>%String</Type>
 <Required>1</Required>
 </Property>
 
-<Property name="Director">
+<Property name="rezyser">
 <Type>%String</Type>
 <Required>1</Required>
 </Property>
@@ -188,9 +206,8 @@
 <IdLocation>^Kino.FilmD</IdLocation>
 <IndexLocation>^Kino.FilmI</IndexLocation>
 <StreamLocation>^Kino.FilmS</StreamLocation>
+<ExtentSize>10</ExtentSize>
 <Data name="FilmDefaultData">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -200,14 +217,47 @@
 <Value name="3">
 <Value>Director</Value>
 </Value>
+<Value name="4">
+<Value>tytul</Value>
+</Value>
+<Value name="5">
+<Value>rezyser</Value>
+</Value>
 </Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="Director">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>5</AverageFieldSize>
+</Property>
+<Property name="Title">
+<Selectivity>11.1111%</Selectivity>
+<AverageFieldSize>16.3</AverageFieldSize>
+</Property>
+<Property name="rezyser">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>5</AverageFieldSize>
+</Property>
+<Property name="tytul">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>4.8</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
 
 
 <Class name="Kino.Klient">
-<Super>%Persistent,%XML.Adaptor</Super>
-<TimeChanged>64801,34993.343187</TimeChanged>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64802,10586.555381</TimeChanged>
 <TimeCreated>64801,31361.398087</TimeCreated>
 
 <Property name="imie">
@@ -248,9 +298,8 @@
 <IdLocation>^Kino.KlientD</IdLocation>
 <IndexLocation>^Kino.KlientI</IndexLocation>
 <StreamLocation>^Kino.KlientS</StreamLocation>
+<ExtentSize>10</ExtentSize>
 <Data name="KlientDefaultData">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -270,13 +319,57 @@
 <Value>adres</Value>
 </Value>
 </Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>1.1</AverageFieldSize>
+</Property>
+<Property name="adres">
+<Selectivity>12.5000%</Selectivity>
+<AverageFieldSize>1.1</AverageFieldSize>
+</Property>
+<Property name="imie">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>5</AverageFieldSize>
+</Property>
+<Property name="liczbaBiletowKupionych">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>8.8</AverageFieldSize>
+</Property>
+<Property name="nazwisko">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>4.9</AverageFieldSize>
+</Property>
+<Property name="sumaWydanychPieniedzy">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>4</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
 
 
+<Project name="Kino" LastModified="2018-06-03 02:48:17.257026">
+  <Items>
+    <ProjectItem name="Kino.Adres" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Bilet" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.BiletNormalny" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.BiletUlgowy" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Film" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Klient" type="CLS"></ProjectItem>
+    <ProjectItem name="Kino.Sprzedawca" type="CLS"></ProjectItem>
+  </Items>
+</Project>
+
+
 <Class name="Kino.Sprzedawca">
-<Super>%Persistent,%XML.Adaptor</Super>
-<TimeChanged>64801,34993.301254</TimeChanged>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>64802,10577.786637</TimeChanged>
 <TimeCreated>64801,32011.248002</TimeCreated>
 
 <Property name="imie">
@@ -313,9 +406,8 @@
 <IdLocation>^Kino.SprzedawcaD</IdLocation>
 <IndexLocation>^Kino.SprzedawcaI</IndexLocation>
 <StreamLocation>^Kino.SprzedawcaS</StreamLocation>
+<ExtentSize>10</ExtentSize>
 <Data name="SprzedawcaDefaultData">
-<Structure>listnode</Structure>
-<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -332,19 +424,33 @@
 <Value>sumaPieniedzyZBiletow</Value>
 </Value>
 </Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>1.1</AverageFieldSize>
+</Property>
+<Property name="imie">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>4.9</AverageFieldSize>
+</Property>
+<Property name="liczbaBiletowSprzedanych">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>9</AverageFieldSize>
+</Property>
+<Property name="nazwisko">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>4.9</AverageFieldSize>
+</Property>
+<Property name="sumaPieniedzyZBiletow">
+<Selectivity>10.0000%</Selectivity>
+<AverageFieldSize>3.9</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
 </Storage>
 </Class>
-
-
-<Project name="Kino" LastModified="2018-06-02 09:43:05.56201">
-  <Items>
-    <ProjectItem name="Kino.Film" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Klient" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Sprzedawca" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Adres" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Bilet" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.BiletNormalny" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.BiletUlgowy" type="CLS"></ProjectItem>
-  </Items>
-</Project>
 </Export>
