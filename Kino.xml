@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-03 06:07:50">
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.2 (Build 741U_SU)" ts="2018-06-03 06:14:44">
 <Class name="Kino.Adres">
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
-<TimeChanged>64802,20335.434124</TimeChanged>
+<TimeChanged>64802,22399.264202</TimeChanged>
 <TimeCreated>64801,32381.325689</TimeCreated>
 
 <Property name="ulica">
@@ -24,8 +24,9 @@
 <IdLocation>^Kino.AdresD</IdLocation>
 <IndexLocation>^Kino.AdresI</IndexLocation>
 <StreamLocation>^Kino.AdresS</StreamLocation>
-<ExtentSize>10</ExtentSize>
 <Data name="AdresDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
@@ -33,38 +34,12 @@
 <Value>ulica</Value>
 </Value>
 <Value name="3">
-<Value>NrUlicy</Value>
-</Value>
-<Value name="4">
 <Value>NrDomu</Value>
 </Value>
-<Value name="5">
+<Value name="4">
 <Value>miasto</Value>
 </Value>
 </Data>
-<Property name="%%CLASSNAME">
-<Selectivity>100.0000%</Selectivity>
-<AverageFieldSize>1</AverageFieldSize>
-</Property>
-<Property name="%%ID">
-<Selectivity>1</Selectivity>
-<AverageFieldSize>1.1</AverageFieldSize>
-</Property>
-<Property name="NrDomu">
-<Selectivity>10.0000%</Selectivity>
-<AverageFieldSize>8.8</AverageFieldSize>
-</Property>
-<Property name="miasto">
-<Selectivity>10.0000%</Selectivity>
-<AverageFieldSize>5</AverageFieldSize>
-</Property>
-<Property name="ulica">
-<Selectivity>10.0000%</Selectivity>
-<AverageFieldSize>4.9</AverageFieldSize>
-</Property>
-<SQLMap name="IDKEY">
-<BlockCount>-4</BlockCount>
-</SQLMap>
 </Storage>
 </Class>
 
@@ -179,7 +154,7 @@
 
 <Class name="Kino.Film">
 <Super>%Persistent,%Populate,%XML.Adaptor</Super>
-<TimeChanged>64802,20336.92965</TimeChanged>
+<TimeChanged>64802,22439.110565</TimeChanged>
 <TimeCreated>64800,86033.900855</TimeCreated>
 
 <Property name="tytul">
@@ -206,51 +181,19 @@
 <IdLocation>^Kino.FilmD</IdLocation>
 <IndexLocation>^Kino.FilmI</IndexLocation>
 <StreamLocation>^Kino.FilmS</StreamLocation>
-<ExtentSize>10</ExtentSize>
 <Data name="FilmDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
 <Value name="1">
 <Value>%%CLASSNAME</Value>
 </Value>
 <Value name="2">
-<Value>Title</Value>
-</Value>
-<Value name="3">
-<Value>Director</Value>
-</Value>
-<Value name="4">
 <Value>tytul</Value>
 </Value>
-<Value name="5">
+<Value name="3">
 <Value>rezyser</Value>
 </Value>
 </Data>
-<Property name="%%CLASSNAME">
-<Selectivity>100.0000%</Selectivity>
-<AverageFieldSize>1</AverageFieldSize>
-</Property>
-<Property name="%%ID">
-<Selectivity>1</Selectivity>
-<AverageFieldSize>2</AverageFieldSize>
-</Property>
-<Property name="Director">
-<Selectivity>10.0000%</Selectivity>
-<AverageFieldSize>5</AverageFieldSize>
-</Property>
-<Property name="Title">
-<Selectivity>11.1111%</Selectivity>
-<AverageFieldSize>16.3</AverageFieldSize>
-</Property>
-<Property name="rezyser">
-<Selectivity>10.0000%</Selectivity>
-<AverageFieldSize>5</AverageFieldSize>
-</Property>
-<Property name="tytul">
-<Selectivity>10.0000%</Selectivity>
-<AverageFieldSize>4.8</AverageFieldSize>
-</Property>
-<SQLMap name="IDKEY">
-<BlockCount>-4</BlockCount>
-</SQLMap>
 </Storage>
 </Class>
 
@@ -354,17 +297,6 @@
 </Class>
 
 
-<Project name="Kino" LastModified="2018-06-03 02:48:17.257026">
-  <Items>
-    <ProjectItem name="Kino.Adres" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Bilet" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.BiletNormalny" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.BiletUlgowy" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Film" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Klient" type="CLS"></ProjectItem>
-    <ProjectItem name="Kino.Sprzedawca" type="CLS"></ProjectItem>
-  </Items>
-</Project>
 
 
 <Class name="Kino.Sprzedawca">
